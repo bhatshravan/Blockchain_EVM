@@ -1,0 +1,28 @@
+header h1 {
+    padding-top: 40px;
+    font-size: 40pt;
+    text-align: center;
+    font-weight: 400;
+    background: -webkit-linear-gradient(rgb(99, 90, 224), #333);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+section {
+    padding-top: 20px;
+    font-size: 20pt;
+}
+
+section td>* {
+    vertical-align: middle;
+    text-align: center;
+}
+
+#tableDiv {
+    text-align: center;
+}
+
+body{
+    background: url('background.jpg');
+    background-repeat: no-repeat;
+}
