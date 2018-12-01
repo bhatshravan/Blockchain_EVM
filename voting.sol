@@ -9,18 +9,23 @@ contract Voting {
 
   mapping (bytes32 => uint8) public votesReceived;
 
-  /* Solidity doesn't let you pass in an array of strings in the constructor (yet).
-  We will use an array of bytes32 instead to store the list of candidates
-  */
+  uint8 public numberOfPeopleVoted=0;
+
+  mapping (bytes32 => uint8) public aadhaar;
+
+ 
+
 
   bytes32[] public candidateList;
 
+  bytes32[] public votedList;
   /* This is the constructor which will be called once when you
   deploy the contract to the blockchain. When we deploy the contract,
   we will pass an array of candidates who will be contesting in the election
   */
-  function Voting(bytes32[] candidateNames) {
+  function Voting(bytes32[] candidateNames , bytes32[] aadhaarList) {
     candidateList = candidateNames;
+    votedList = aadhaarList;
   }
 
   // This function returns the total votes a candidate has received so far
@@ -29,16 +34,36 @@ contract Voting {
     return votesReceived[candidate];
   }
 
+  function totalVotesCast() returns (uint8){
+    return numberOfPeopleVoted;
+  }
+
   // This function increments the vote count for the specified candidate. This
   // is equivalent to casting a vote
-  function voteForCandidate(bytes32 candidate) {
+  function voteForCandidate(bytes32 candidate , bytes32 aadhaarin) {
     if (validCandidate(candidate) == false) throw;
+    if (validVoter(aadhaarin) == false) throw;
+
     votesReceived[candidate] += 1;
+    aadhaar[aadhaarin] += 1;
   }
 
   function validCandidate(bytes32 candidate) returns (bool) {
     for(uint i = 0; i < candidateList.length; i++) {
       if (candidateList[i] == candidate) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  function validVoter(bytes32 aadhaarin) returns (bool) {
+    for(uint i =0; i < votedList.length; i++) {
+      if (votedList[i] == aadhaarin){
+        if (aadhaar[aadhaarin] == 1){
+          return true;
+         //return true;
+        }
         return true;
       }
     }

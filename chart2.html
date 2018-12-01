@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="./js/web3.min.js"></script>
+    <script src="./js/jquery-3.1.1.slim.min.js"></script>
+    <script src="./js/Chart.js"></script>
+    <meta http-equiv="refresh" content="5" />
+    <meta charset="utf-8">
+    <title>Chart Analysis</title>
+<style media="screen">
+  #canvas-holder{
+    margin-top: 200px;
+  }
+</style>
+  </head>
+  <body>
+    <center>
+    <div id="canvas-holder" style="width:60%">
+        <canvas id="myChart"></canvas>
+      </div> </center>
+  </body>
+</html>
+<script type="text/javascript" src="./server.js"></script>
+<script>
+web3 = new Web3(new Web3.providers.HttpProvider("http://REPLACE_WITH_IP_ADDRESS:8545"));
+asciiToHex = Web3.utils.asciiToHex;
+ABI_DEFINITION = JSON.parse('REPLACE_WITH_ABI_DEFINITION');
+contractInstance = new web3.eth.Contract(ABI_DEFINITION, 'REPLACE_WITH_CONTRACT_ADDRESS');
+candidates = REPLACE_WITH_CANDIDATES
+
+var arr=[REPLACE_WITH_1_VOTE];
+
+
+var i=0;
+$(document).ready(function() {
+  Object.keys(candidates).forEach((name) => {
+    contractInstance.methods.totalVotesFor(asciiToHex(name)).call()
+    .then((val) => {
+      $("#" + candidates[name]).html(val);
+      arr[i]=(val);
+      console.log(arr[i]);
+
+      i=i+1;
+    })
+     .then(() => {
+
+             var ctx = document.getElementById("myChart");
+              var myChart = new Chart(ctx, {
+                  type: 'bar',
+                  data: {
+                      labels: [REPLACE_WITH_CHART],
+                      datasets: [{
+                          label: '# of Votes',
+                          data: [REPLACE_WITH_NUM_CHART],
+                          backgroundColor: [
+                              'rgba(255, 99, 132, 0.2)',
+                              'rgba(54, 162, 235, 0.2)',
+                              'rgba(255, 206, 86, 0.2)',
+                              'rgba(75, 192, 192, 0.2)',
+                              'rgba(153, 102, 255, 0.2)',
+                              'rgba(35, 231, 255, 0.2)',
+                              'rgba(120, 87, 142, 0.2)',
+                              'rgba(255, 159, 64, 0.2)'
+                          ],
+                          borderColor: [
+                              'rgba(255,99,132,1)',
+                              'rgba(54, 162, 235, 1)',
+                              'rgba(255, 206, 86, 1)',
+                              'rgba(75, 192, 192, 1)',
+                              'rgba(153, 102, 255, 1)',
+                              'rgba(35, 231, 255, 1)',
+                              'rgba(120, 87, 142, 1)',
+                              'rgba(255, 159, 64, 1)'
+                          ],
+                          borderWidth: 3
+                      }]
+                  },
+                  options: {
+                      scales: {
+                          yAxes: [{
+                              ticks: {
+                                  beginAtZero: true
+                              }
+                          }]
+                      }
+                  }
+              });
+          });
+      console.log(REPLACE_WITH_NUM_CHART);
+        });
+  });
+
+</script>

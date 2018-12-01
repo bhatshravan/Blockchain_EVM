@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>thank you</title>
+    <style media="screen">
+
+      body{
+        background-color: rgb(119,55,145);
+      }
+
+    .shadow1 {
+      margin: 300px;
+      width: 405px;
+      height: 220px;
+      background-color: rgb(68,68,68); /* Needed for IEs */
+
+      -moz-box-shadow: 10px 15px 15px rgba(68, 68, 68, 0.6);
+      -webkit-box-shadow: 15px 15px 15px rgba(68, 68, 68, 0.6);
+      box-shadow: 15px 15px 15px rgba(68, 68, 68, 0.6);
+
+      filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=3,MakeShadow=true,ShadowOpacity=0.30);
+      -ms-filter: "progid:DXImageTransform.Microsoft.Blur(PixelRadius=3,MakeShadow=true,ShadowOpacity=0.30)";
+      zoom: 1;
+    }
+    .shadow1 .content {
+      position: relative; /* This protects the inner element from being blurred */
+      padding: 100px;
+      width: 200px;
+    }
+
+    button{
+      width: 100px;
+    }
+    </style>
+
+    <link href='./js/bootstrap.min.css' rel='stylesheet' type='text/css'>
+    
+  </head>
+  <body>
+    <center>
+      <div class="shadow1">
+        <div class="content">
+          <button type="button" onclick="closeapp()" name="OK" class="btn btn-primary">OK</button>
+        </div>
+      </div>
+  </center>
+  </body>
+</html>
